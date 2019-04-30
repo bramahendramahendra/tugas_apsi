@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2019 at 07:57 PM
+-- Generation Time: Apr 30, 2019 at 07:39 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -44,6 +44,27 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`admin_id`, `username`, `password`, `firstname`, `middlename`, `lastname`) VALUES
 (1, 'admin', 'admin', 'Private', '', 'Administrator'),
 (2, 'admin2', 'admin2', 'Agus', 'Alex', 'Zainudin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `akses_user`
+--
+
+CREATE TABLE `akses_user` (
+  `id_akses` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `ket` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `akses_user`
+--
+
+INSERT INTO `akses_user` (`id_akses`, `nama`, `ket`) VALUES
+(1, 'admin', 'Administrator'),
+(2, 'pimpinan', 'pimpinan perusahaan'),
+(3, 'Bag. Keuangan', 'Ketua Bagian Keuangan');
 
 -- --------------------------------------------------------
 
@@ -197,6 +218,52 @@ CREATE TABLE `late` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mata_pelajaran`
+--
+
+CREATE TABLE `mata_pelajaran` (
+  `id_pelajaran` int(11) NOT NULL,
+  `id_instruktur` int(11) NOT NULL,
+  `mata_kuliah` varchar(255) NOT NULL,
+  `jam_pelajaran` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mata_pelajaran`
+--
+
+INSERT INTO `mata_pelajaran` (`id_pelajaran`, `id_instruktur`, `mata_kuliah`, `jam_pelajaran`) VALUES
+(1, 1201901, 'Kalkulus', '18.00'),
+(2, 2201902, 'Fisika', '18.00'),
+(3, 1201905, 'Kalkulus', '17.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paket`
+--
+
+CREATE TABLE `paket` (
+  `id_paket` int(11) NOT NULL,
+  `pilh_paket` varchar(50) NOT NULL,
+  `jam_belajar` varchar(50) NOT NULL,
+  `id_instruktur` int(11) NOT NULL,
+  `mata_kuliah` varchar(255) NOT NULL,
+  `hari_belajar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `paket`
+--
+
+INSERT INTO `paket` (`id_paket`, `pilh_paket`, `jam_belajar`, `id_instruktur`, `mata_kuliah`, `hari_belajar`) VALUES
+(1, 'Gold', '17.00-21.00', 1201902, 'Kalkulus, Fisika & Kimia', 'Rabu, Jumat'),
+(2, 'Diamond', '18.00-20.30', 1201903, 'Kalkulus, Fisika, Kimia & Bahasa Inggris', 'Selasa, Rabu, Kamis, Jumat'),
+(4, 'Reguler', '18.00-20.30', 1201901, 'Kalkulus & Fisika', 'Selasa, Kamis');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pembayaran`
 --
 
@@ -235,6 +302,35 @@ CREATE TABLE `penggajian1` (
 
 INSERT INTO `penggajian1` (`id_guru`, `id_gaji`, `jam_kerja`, `nama_guru`, `total_gaji`) VALUES
 (1, 1, 8, 'Udin', 3500000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `siswa`
+--
+
+CREATE TABLE `siswa` (
+  `id_siswa` int(10) NOT NULL,
+  `nis` int(5) NOT NULL,
+  `nama_siswa` varchar(50) NOT NULL,
+  `tempat_lahir_siswa` varchar(20) DEFAULT NULL,
+  `tanggal_lahir_siswa` date DEFAULT NULL,
+  `alamat_siswa` varchar(200) DEFAULT NULL,
+  `telfon_siswa` bigint(20) DEFAULT NULL,
+  `agama_siswa` varchar(10) DEFAULT NULL,
+  `pilh_paket` varchar(20) NOT NULL,
+  `mata_kuliah` varchar(255) NOT NULL,
+  `jam_belajar` varchar(20) NOT NULL,
+  `hari` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`id_siswa`, `nis`, `nama_siswa`, `tempat_lahir_siswa`, `tanggal_lahir_siswa`, `alamat_siswa`, `telfon_siswa`, `agama_siswa`, `pilh_paket`, `mata_kuliah`, `jam_belajar`, `hari`) VALUES
+(21, 1232, 'Firhan Wibianto', 'Bandung', '1996-10-21', 'Sukapura', 823417723, 'Islam', 'Diamond', 'Kalkulus, Fisika, Kimia & Bahasa Inggris', '18.00-20.30', 'Selasa, Rabu, Kamis, Jumat'),
+(22, 1233, 'Nurfatwa Alifan', 'Cilegon', '1996-10-21', 'Sukapura', 823417723, 'Islam', 'Reguler', 'Kalkulus & Fisika', '18.00-20.30', 'Selasa, Kamis');
 
 -- --------------------------------------------------------
 
@@ -350,6 +446,28 @@ INSERT INTO `tbltransaksi` (`kd_transaksi`, `tgl`, `id_jeniskas`, `id_kasmasuk`,
 ('TRS26041700003', '2017-04-26', 2, 0, 1, 'Pembelian Alat Kantor', 2000000),
 ('TRS31101700001', '2017-10-30', 2, 0, 1, 'Pembelia brang kapas', 500000);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `idusers` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `status` varchar(5) NOT NULL,
+  `id_akses` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`idusers`, `username`, `password`, `status`, `id_akses`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Y', 1),
+(2, 'dada', 'b01abf84324066bdb4eed4d5bf20f887', '', 3);
+
 --
 -- Indexes for dumped tables
 --
@@ -359,6 +477,12 @@ INSERT INTO `tbltransaksi` (`kd_transaksi`, `tgl`, `id_jeniskas`, `id_kasmasuk`,
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `akses_user`
+--
+ALTER TABLE `akses_user`
+  ADD PRIMARY KEY (`id_akses`);
 
 --
 -- Indexes for table `calen`
@@ -404,6 +528,18 @@ ALTER TABLE `late`
   ADD PRIMARY KEY (`late_id`);
 
 --
+-- Indexes for table `mata_pelajaran`
+--
+ALTER TABLE `mata_pelajaran`
+  ADD PRIMARY KEY (`id_pelajaran`);
+
+--
+-- Indexes for table `paket`
+--
+ALTER TABLE `paket`
+  ADD PRIMARY KEY (`id_paket`);
+
+--
 -- Indexes for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
@@ -415,6 +551,12 @@ ALTER TABLE `pembayaran`
 --
 ALTER TABLE `penggajian1`
   ADD PRIMARY KEY (`id_guru`);
+
+--
+-- Indexes for table `siswa`
+--
+ALTER TABLE `siswa`
+  ADD PRIMARY KEY (`id_siswa`);
 
 --
 -- Indexes for table `student`
@@ -448,6 +590,12 @@ ALTER TABLE `tbltransaksi`
   ADD PRIMARY KEY (`kd_transaksi`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`idusers`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -456,6 +604,11 @@ ALTER TABLE `tbltransaksi`
 --
 ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `akses_user`
+--
+ALTER TABLE `akses_user`
+  MODIFY `id_akses` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `calen`
 --
@@ -492,10 +645,25 @@ ALTER TABLE `instruktur`
 ALTER TABLE `late`
   MODIFY `late_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `mata_pelajaran`
+--
+ALTER TABLE `mata_pelajaran`
+  MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `paket`
+--
+ALTER TABLE `paket`
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
   MODIFY `No_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `siswa`
+--
+ALTER TABLE `siswa`
+  MODIFY `id_siswa` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `student`
 --
@@ -516,6 +684,11 @@ ALTER TABLE `tblkaskeluar`
 --
 ALTER TABLE `tblkasmasuk`
   MODIFY `id_kasmasuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `idusers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --

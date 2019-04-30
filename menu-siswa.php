@@ -10,7 +10,8 @@
         <div class="w3-bar">
             <form action="menu-siswa-system.php" method="post">
                 <button name="pembayaran" class="w3-bar-item w3-button w3-black" style="width:33.3%">Pembayaran</button>
-                <button name="siswa-absen" class="w3-bar-item w3-button w3-teal" style="width:33.3%">Siswa</button>
+                <button name="siswa-absen" class="w3-bar-item w3-button w3-teal" style="width:33.3%">Absen Siswa</button>
+                <button name="siswa-jadwal" class="w3-bar-item w3-button w3-black" style="width:33.3%">Jadwal Siswa</button>
             </form>
         
         

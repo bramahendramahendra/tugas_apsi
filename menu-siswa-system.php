@@ -6,4 +6,7 @@
     if(isset($_POST['siswa-absen'])){
         header('location:siswa/absent.php');
     }
+    if(isset($_POST['siswa-jadwal'])){
+        header('location:siswa/siswa/index-siswa.php');
+    }
 ?>
